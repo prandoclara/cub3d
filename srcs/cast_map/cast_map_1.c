@@ -6,7 +6,7 @@
 /*   By: claprand <claprand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 13:17:19 by claprand          #+#    #+#             */
-/*   Updated: 2025/01/02 13:17:21 by claprand         ###   ########.fr       */
+/*   Updated: 2025/01/07 16:54:23 by claprand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,14 @@ char	*trim_path(char *texture, char *texture_name, t_cub *cub)
 
 void	get_nice_texture_path(t_cub *cub)
 {
-	cub->parse->north_path = trim_path(cub->parse->texture_north, "NO", cub);
-	cub->parse->south_path = trim_path(cub->parse->texture_south, "SO", cub);
-	cub->parse->east_path = trim_path(cub->parse->texture_east, "EA", cub);
-	cub->parse->west_path = trim_path(cub->parse->texture_west, "WE", cub);
+	if (cub->parse->texture_north != NULL)
+		cub->parse->north_path = trim_path(cub->parse->texture_north, "NO", cub);
+	if (cub->parse->texture_south != NULL)
+		cub->parse->south_path = trim_path(cub->parse->texture_south, "SO", cub);
+	if (cub->parse->texture_east != NULL)
+		cub->parse->east_path = trim_path(cub->parse->texture_east, "EA", cub);
+	if (cub->parse->texture_west != NULL)
+		cub->parse->west_path = trim_path(cub->parse->texture_west, "WE", cub);
 }
 
 int	cast_map(char *map, t_cub *cub)
