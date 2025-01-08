@@ -6,7 +6,7 @@
 /*   By: claprand <claprand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 18:39:10 by nicjousl          #+#    #+#             */
-/*   Updated: 2025/01/07 14:26:12 by claprand         ###   ########.fr       */
+/*   Updated: 2025/01/08 11:41:32 by claprand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,12 @@ void	end_game5(t_cub *cub)
 		mlx_destroy_display(cub->game->mlx_ptr);
 		free(cub->game->mlx_ptr);
 	}
-	if (cub->game)
-		free(cub->game);
-	if (cub->parse)
-		free(cub->parse);
-	if (cub->player)
-		free(cub->player);
-	if (cub->ray)
-		free(cub->ray);
-	if (cub->vector)
-		free(cub->vector);
-	if (cub->minimap)
-		free(cub->minimap);
-	if (cub->rvb)
-		free(cub->rvb);
-	if (cub->image)
-		free(cub->image);
-	exit(0);
+	end_game6(cub);
 }
 
 void	end_game4(t_cub *cub)
 {
-		int	i;
+	int	i;
 
 	i = 0;
 	while (i < 4)
@@ -62,7 +46,8 @@ void	end_game4(t_cub *cub)
 		if (cub->image->textures[i] != NULL)
 		{
 			if (cub->image->textures[i]->xpm != NULL)
-				mlx_destroy_image(cub->game->mlx_ptr, cub->image->textures[i]->xpm);
+				mlx_destroy_image(cub->game->mlx_ptr,
+					cub->image->textures[i]->xpm);
 			free(cub->image->textures[i]);
 		}
 		i++;

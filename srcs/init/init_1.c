@@ -6,7 +6,7 @@
 /*   By: claprand <claprand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 13:17:13 by claprand          #+#    #+#             */
-/*   Updated: 2025/01/07 15:49:42 by claprand         ###   ########.fr       */
+/*   Updated: 2025/01/08 10:46:57 by claprand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	init_ray_s(t_cub *cub)
 	cub->ray->wall_dist = 0;
 	return (0);
 }
+
 int	init_rvb(t_cub *cub)
 {
 	t_rvb	*rvb;
@@ -81,4 +82,3 @@ int	init_rvb(t_cub *cub)
 	cub->rvb->b = 0;
 	return (0);
 }
-

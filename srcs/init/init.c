@@ -6,7 +6,7 @@
 /*   By: claprand <claprand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 11:09:02 by claprand          #+#    #+#             */
-/*   Updated: 2025/01/07 13:32:14 by claprand         ###   ########.fr       */
+/*   Updated: 2025/01/08 10:51:14 by claprand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ int	init_parse(t_cub *cub)
 	cub->parse->str_g = NULL;
 	cub->parse->str_b = NULL;
 	cub->parse->start_m = 0;
-	cub->parse->hexa = NULL;
-	cub->parse->test = NULL;
 	return (0);
 }
 
@@ -99,11 +97,11 @@ int	init_minimap(t_cub *cub)
 	return (0);
 }
 
-int init_textures(t_cub *cub)
+int	init_textures(t_cub *cub)
 {
-	t_textures *tex; 
-	int	i; 
-	
+	t_textures	*tex;
+	int			i;
+
 	i = 0;
 	while (i < 4)
 	{
@@ -116,11 +114,8 @@ int init_textures(t_cub *cub)
 		tex->line_length = 0;
 		tex->addr = 0;
 		tex->xpm = NULL;
-		// tex->pixels = ft_calloc(sizeof(unsigned int), WIDTH * HEIGHT);
-		// if (!tex->pixels)
-		// 	return (error_handler(17), 1);
 		tex->pixels = NULL;
-		i++; 
+		i++;
 	}
 	return (0);
 }

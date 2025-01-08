@@ -6,7 +6,7 @@
 /*   By: claprand <claprand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:28:19 by claprand          #+#    #+#             */
-/*   Updated: 2025/01/07 13:06:13 by claprand         ###   ########.fr       */
+/*   Updated: 2025/01/08 11:43:14 by claprand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	main(int ac, char **av)
 			end_game(&cub);
 		if (parsing(&cub) == 1)
 			end_game(&cub);
-		//printf("%d pixel\n",cub.image->textures[0]->pixels[0]);
 		if (launch_game(&cub) == 1)
 			end_game(&cub);
 		close(cub.parse->fd);

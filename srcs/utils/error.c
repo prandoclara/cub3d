@@ -6,7 +6,7 @@
 /*   By: claprand <claprand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:59:50 by nicjousl          #+#    #+#             */
-/*   Updated: 2025/01/02 13:26:09 by claprand         ###   ########.fr       */
+/*   Updated: 2025/01/08 11:12:08 by claprand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ void	error_handler2(int n)
 		ft_fprintf(2, RESET RED"Couldn't create the image\n"RESET);
 	else if (n == 17)
 		ft_fprintf(2, RESET RED"Error while allocating memory\n"RESET);
+	else if (n == 18)
+		ft_fprintf(2, RESET RED"Error while downloading textures\n"RESET);
+	else if (n == 19)
+		ft_fprintf(2, RESET RED"Unable to retrieve the texture address\n"RESET);
+	else if (n == 20)
+		ft_fprintf(2, RESET RED"Missing textures path\n"RESET);
 }
 
 void	error_handler(int n)

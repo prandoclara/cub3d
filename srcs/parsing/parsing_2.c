@@ -6,7 +6,7 @@
 /*   By: claprand <claprand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:43:51 by claprand          #+#    #+#             */
-/*   Updated: 2025/01/07 16:53:01 by claprand         ###   ########.fr       */
+/*   Updated: 2025/01/08 10:54:51 by claprand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,54 @@ void	copy_map_with_extra_char(t_cub *cub)
 	cub->parse->copy_map[i] = NULL;
 }
 
+// int	zero_contact_to_x(t_cub *cub)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	i = -1;
+// 	while (cub->parse->copy_map[++i])
+// 	{
+// 		j = -1;
+// 		while (cub->parse->copy_map[i][++j])
+// 		{
+// 			if (cub->parse->copy_map[i][j] == '0')
+// 			{
+// 				if (j == 0)
+// 					return (1);
+// 				if (cub->parse->copy_map[i + 1][j]
+// 					&& cub->parse->copy_map[i + 1][j] == 'X')
+// 					return (1);
+// 				if (cub->parse->copy_map[i - 1][j]
+// 					&& cub->parse->copy_map[i - 1][j] == 'X')
+// 					return (1);
+// 				if (cub->parse->copy_map[i][j + 1]
+// 					&& cub->parse->copy_map[i][j + 1] == 'X')
+// 					return (1);
+// 				if (cub->parse->copy_map[i][j - 1]
+// 					&& cub->parse->copy_map[i][j - 1] == 'X')
+// 					return (1);
+// 			}
+// 		}
+// 	}
+// 	return (0);
+// }
+
+int	is_zero_in_contact_with_x(char **map, int i, int j)
+{
+	if (j == 0)
+		return (1);
+	if (map[i + 1][j] && map[i + 1][j] == 'X')
+		return (1);
+	if (map[i - 1][j] && map[i - 1][j] == 'X')
+		return (1);
+	if (map[i][j + 1] && map[i][j + 1] == 'X')
+		return (1);
+	if (map[i][j - 1] && map[i][j - 1] == 'X')
+		return (1);
+	return (0);
+}
+
 int	zero_contact_to_x(t_cub *cub)
 {
 	int	i;
@@ -41,23 +89,9 @@ int	zero_contact_to_x(t_cub *cub)
 		j = -1;
 		while (cub->parse->copy_map[i][++j])
 		{
-			if (cub->parse->copy_map[i][j] == '0')
-			{
-				if (j == 0)
-					return (1);
-				if (cub->parse->copy_map[i + 1][j]
-					&& cub->parse->copy_map[i + 1][j] == 'X')
-					return (1);
-				if (cub->parse->copy_map[i - 1][j]
-					&& cub->parse->copy_map[i - 1][j] == 'X')
-					return (1);
-				if (cub->parse->copy_map[i][j + 1]
-					&& cub->parse->copy_map[i][j + 1] == 'X')
-					return (1);
-				if (cub->parse->copy_map[i][j - 1]
-					&& cub->parse->copy_map[i][j - 1] == 'X')
-					return (1);
-			}
+			if (cub->parse->copy_map[i][j] == '0'
+				&& is_zero_in_contact_with_x(cub->parse->copy_map, i, j))
+				return (1);
 		}
 	}
 	return (0);
@@ -67,23 +101,6 @@ int	map_is_close(t_cub *cub)
 {
 	copy_map_with_extra_char(cub);
 	if (zero_contact_to_x(cub) == 1)
-		return (1);
-	return (0);
-}
-
-int	have_texture(t_cub *cub)
-{
-	if (cub->parse->texture_east == NULL)
-		return (1);
-	if (cub->parse->texture_west == NULL)
-		return (1);
-	if (cub->parse->texture_north == NULL)
-		return (1);
-	if (cub->parse->texture_south == NULL)
-		return (1);
-	if (cub->parse->rgb_sky == NULL)
-		return (1);
-	if (cub->parse->rgb_floor == NULL)
 		return (1);
 	return (0);
 }

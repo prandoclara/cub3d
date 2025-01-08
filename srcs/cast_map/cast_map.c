@@ -6,7 +6,7 @@
 /*   By: claprand <claprand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 18:33:26 by nicjousl          #+#    #+#             */
-/*   Updated: 2024/12/30 18:56:18 by claprand         ###   ########.fr       */
+/*   Updated: 2025/01/08 11:55:49 by claprand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,42 +68,44 @@ void	find_the_longest_line(char *map, t_cub *cub)
 	close(cub->parse->fd);
 }
 
-int	cast_char_to_string(char *map, t_cub *cub)
+int	read_map_line(int fd, t_cub *cub, int i)
 {
 	char	buff[2];
-	int		i;
 	int		ret;
-	int		fd;
 	int		j;
 
-	i = 0;
 	ret = 1;
 	buff[0] = 0;
+	j = 0;
+	cub->parse->files[i] = ft_calloc(sizeof(char), cub->parse->long_line + 1);
+	if (cub->parse->files[i] == NULL)
+		return (1);
+	while (1)
+	{
+		ret = read(fd, buff, 1);
+		buff[1] = '\0';
+		if (ret == 0 || buff[0] == '\n')
+			break ;
+		cub->parse->files[i][j] = buff[0];
+		j++;
+	}
+	cub->parse->files[i][j] = '\0';
+	return (0);
+}
+
+int	cast_char_to_string(char *map, t_cub *cub)
+{
+	int	fd;
+
 	fd = open(map, O_RDONLY);
 	if (fd == -1)
+		return (1);
+	if (read_map_lines(fd, cub))
 	{
 		close(fd);
 		return (1);
 	}
-	while (i < cub->parse->nb_line)
-	{
-		j = 0;
-		cub->parse->files[i] = ft_calloc(sizeof(char),
-				cub->parse->long_line + 1);
-		if (cub->parse->files[i] == NULL)
-			return (1);
-		while (1)
-		{
-			ret = read(fd, buff, 1);
-			buff[1] = '\0';
-			if (ret == 0 || buff[0] == '\n')
-				break ;
-			cub->parse->files[i][j] = buff[0];
-			j++;
-		}
-		cub->parse->files[i][j] = '\0';
-		i++;
-	}
+	close(fd);
 	return (0);
 }
 
@@ -133,43 +135,4 @@ int	is_the_map(t_cub *cub)
 		i++;
 	}
 	return (0);
-}
-
-void	get_texture(t_cub *cub)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	cub->parse->start_m = is_the_map(cub);
-	while (++i < cub->parse->nb_line && i < cub->parse->start_m)
-	{
-		j = 0;
-		while (cub->parse->files[i][j + 2])
-		{
-			if (cub->parse->files[i][j] == 'N'
-				&& cub->parse->files[i][j + 1] == 'O'
-				&& cub->parse->files[i][j + 2] == ' ')
-				cub->parse->texture_north = ft_strdup(cub->parse->files[i]);
-			if (cub->parse->files[i][j] == 'S'
-				&& cub->parse->files[i][j + 1] == 'O'
-				&& cub->parse->files[i][j + 2] == ' ')
-				cub->parse->texture_south = ft_strdup(cub->parse->files[i]);
-			if (cub->parse->files[i][j] == 'W'
-				&& cub->parse->files[i][j + 1] == 'E'
-				&& cub->parse->files[i][j + 2] == ' ')
-				cub->parse->texture_west = ft_strdup(cub->parse->files[i]);
-			if (cub->parse->files[i][j] == 'E'
-				&& cub->parse->files[i][j + 1] == 'A'
-				&& cub->parse->files[i][j + 2] == ' ')
-				cub->parse->texture_east = ft_strdup(cub->parse->files[i]);
-			if (cub->parse->files[i][j] == 'F'
-				&& cub->parse->files[i][j + 1] == ' ')
-				cub->parse->rgb_floor = ft_strdup(cub->parse->files[i]);
-			if (cub->parse->files[i][j] == 'C'
-				&& cub->parse->files[i][j + 1] == ' ')
-				cub->parse->rgb_sky = ft_strdup(cub->parse->files[i]);
-			j++;
-		}
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: claprand <claprand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:44:13 by claprand          #+#    #+#             */
-/*   Updated: 2025/01/07 15:15:39 by claprand         ###   ########.fr       */
+/*   Updated: 2025/01/08 10:50:37 by claprand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,117 +81,6 @@ int	check_rgb_int(t_cub *cub)
 		return (1);
 	return (0);
 }
-
-// void	join_rgb_sky(t_cub *cub)
-// {
-// 	cub->parse->hexa = ft_calloc(COLORSIZE, 4);
-// 	//cub->parse->test = ft_calloc(COLORSIZE, 4);
-// 	cub->parse->test = ft_itoa(cub->parse->r_sky);
-// 	cub->parse->hexa = ft_strjoin(cub->parse->hexa, cub->parse->test);
-// 	free(cub->parse->test);
-// 	cub->parse->test =  ft_itoa(cub->parse->g_sky);
-// 	cub->parse->hexa = ft_strjoin(cub->parse->hexa, cub->parse->test);
-// 	free(cub->parse->test);
-// 	cub->parse->test =  ft_itoa(cub->parse->b_sky);
-// 	cub->parse->hexa = ft_strjoin(cub->parse->hexa, cub->parse->test);
-// 	cub->game->rgb_sky = ft_atoi(cub->parse->hexa);
-// }
-
-// void	join_rgb_floor(t_cub *cub)
-// {
-// 	cub->parse->hexa = ft_calloc(COLORSIZE, 4);
-// 	//cub->parse->test = ft_calloc(COLORSIZE, 4);
-// 	cub->parse->test = ft_itoa(cub->parse->r_floor);
-// 	cub->parse->hexa = ft_strjoin(cub->parse->hexa, cub->parse->test);
-// 	free(cub->parse->test);
-// 	cub->parse->test =  ft_itoa(cub->parse->g_floor);
-// 	cub->parse->hexa = ft_strjoin(cub->parse->hexa, cub->parse->test);
-// 	free(cub->parse->test);
-// 	cub->parse->test =  ft_itoa(cub->parse->b_floor);
-// 	cub->parse->hexa = ft_strjoin(cub->parse->hexa, cub->parse->test);
-// 	cub->game->rgb_floor = ft_atoi(cub->parse->hexa);
-// }
-
-void join_rgb_sky(t_cub *cub)
-{
-    char *temp;
-
-    cub->parse->hexa = ft_strdup(""); // Initialiser une chaîne vide
-    if (!cub->parse->hexa)
-        return; // Gérer une éventuelle erreur d'allocation
-
-    // Ajouter la valeur rouge
-    cub->parse->test = ft_itoa(cub->parse->r_sky);
-    if (!cub->parse->test)
-        return (free(cub->parse->hexa));
-    temp = cub->parse->hexa;
-    cub->parse->hexa = ft_strjoin(cub->parse->hexa, cub->parse->test);
-    free(temp);
-    free(cub->parse->test);
-
-    // Ajouter la valeur verte
-    cub->parse->test = ft_itoa(cub->parse->g_sky);
-    if (!cub->parse->test)
-        return (free(cub->parse->hexa));
-    temp = cub->parse->hexa;
-    cub->parse->hexa = ft_strjoin(cub->parse->hexa, cub->parse->test);
-    free(temp);
-    free(cub->parse->test);
-
-    // Ajouter la valeur bleue
-    cub->parse->test = ft_itoa(cub->parse->b_sky);
-    if (!cub->parse->test)
-        return (free(cub->parse->hexa));
-    temp = cub->parse->hexa;
-    cub->parse->hexa = ft_strjoin(cub->parse->hexa, cub->parse->test);
-    free(temp);
-    free(cub->parse->test);
-
-    // Convertir en entier et libérer
-    cub->game->rgb_sky = ft_atoi(cub->parse->hexa);
-    free(cub->parse->hexa);
-}
-
-void join_rgb_floor(t_cub *cub)
-{
-    char *temp;
-
-    cub->parse->hexa = ft_strdup(""); // Initialiser une chaîne vide
-    if (!cub->parse->hexa)
-        return;
-
-    // Ajouter la valeur rouge
-    cub->parse->test = ft_itoa(cub->parse->r_floor);
-    if (!cub->parse->test)
-        return (free(cub->parse->hexa));
-    temp = cub->parse->hexa;
-    cub->parse->hexa = ft_strjoin(cub->parse->hexa, cub->parse->test);
-    free(temp);
-    free(cub->parse->test);
-
-    // Ajouter la valeur verte
-    cub->parse->test = ft_itoa(cub->parse->g_floor);
-    if (!cub->parse->test)
-        return (free(cub->parse->hexa));
-    temp = cub->parse->hexa;
-    cub->parse->hexa = ft_strjoin(cub->parse->hexa, cub->parse->test);
-    free(temp);
-    free(cub->parse->test);
-
-    // Ajouter la valeur bleue
-    cub->parse->test = ft_itoa(cub->parse->b_floor);
-    if (!cub->parse->test)
-        return (free(cub->parse->hexa));
-    temp = cub->parse->hexa;
-    cub->parse->hexa = ft_strjoin(cub->parse->hexa, cub->parse->test);
-    free(temp);
-    free(cub->parse->test);
-
-    // Convertir en entier et libérer
-    cub->game->rgb_floor = ft_atoi(cub->parse->hexa);
-    free(cub->parse->hexa);
-}
-
 
 int	check_rgb(t_cub *cub)
 {
