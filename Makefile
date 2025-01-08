@@ -6,7 +6,7 @@
 #    By: claprand <claprand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/22 11:32:19 by claprand          #+#    #+#              #
-#    Updated: 2025/01/07 13:01:18 by claprand         ###   ########.fr        #
+#    Updated: 2025/01/08 12:11:26 by claprand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,15 @@ SRC = 	main.c \
 		raycasting/raycasting_1.c \
 		minimap/minimap.c \
 		minimap/minimap_utils.c \
+		game/player.c \
+		parsing/parsing_4.c \
+		utils/utils.c \
+		raycasting/textures.c \
+		raycasting/draw_wall_utils.c \
+		utils/free_1.c \
+		cast_map/utils_textures.c \
+		cast_map/utils_textures_1.c \
+		cast_map/utils_path.c \
 	
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRC))
 OBJ = $(SRC:.c=.o)	

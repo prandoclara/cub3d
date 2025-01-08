@@ -6,7 +6,7 @@
 /*   By: claprand <claprand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:27:48 by claprand          #+#    #+#             */
-/*   Updated: 2025/01/07 13:48:15 by claprand         ###   ########.fr       */
+/*   Updated: 2025/01/08 12:03:41 by claprand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,11 @@
 # endif
 
 // utils
+void	my_put_pixel_to_image2(t_cub *cub, int x, int y, int color);
+void	my_put_pixel_to_image(t_cub *cub, int x, int y, long color);
 void	error_handler(int n);
 int		end_game(t_cub *cub);
+void	end_game6(t_cub *cub);
 
 // parse_arg
 void	parse_arg(char *map, t_cub *cub);
@@ -78,6 +81,10 @@ int		check_rgb_int(t_cub *cub);
 int		check_rgb(t_cub *cub);
 int		valid_texture(t_cub *cub);
 
+// parsing_4
+void	join_rgb_sky(t_cub *cub);
+void	join_rgb_floor(t_cub *cub);
+
 // utils 
 char	*ft_master_strndup(char *s, int start, int size);
 
@@ -86,13 +93,28 @@ void	get_size_of_the_file(char *map, t_cub *cub);
 void	find_the_longest_line(char *map, t_cub *cub);
 int		cast_char_to_string(char *map, t_cub *cub);
 int		is_the_map(t_cub *cub);
-void	get_texture(t_cub *cub);
+int		read_map_line(int fd, t_cub *cub, int i);
 
-// cast_map2
+// cast_map_1
 void	files_to_map(t_cub *cub);
 char	*trim_path(char *texture, char *texture_name, t_cub *cub);
 void	get_nice_texture_path(t_cub *cub);
 int		cast_map(char *map, t_cub *cub);
+
+// utils_textures
+int		is_north_texture(t_cub *cub, int i, int j);
+int		is_south_texture(t_cub *cub, int i, int j);
+int		is_west_texture(t_cub *cub, int i, int j);
+int		is_east_texture(t_cub *cub, int i, int j);
+int		read_map_lines(int fd, t_cub *cub);
+
+// utils_textures_1
+void	get_texture(t_cub *cub);
+
+// utils_path
+void	skip_texture_name(char *texture, int *i, int *j, char *texture_name);
+void	skip_spaces(char *texture, int *i);
+char	*copy_path(char *texture, int i, char *str);
 
 // init_data
 void	init_data(t_cub *cub);
@@ -112,6 +134,9 @@ int		init_rvb(t_cub *cub);
 
 //game 
 int		launch_game(t_cub *cub);
+
+// player 
+int		init_player_position(t_cub *cub);
 
 // raycasting
 int		raycasting(t_cub *cub);
@@ -136,15 +161,20 @@ int		find_width_mini_map(char **map);
 int		find_height_mini_map(char **map);
 
 // draw_wall
-void	my_put_pixel_to_image2(t_cub *cub, int x, int y, int color);
 void    draw_wall2(t_cub *cub, int x, double tex_pos);
+
+// draw_wall_utils
+double	calculate_step(t_cub *cub);
+double	calculate_tex_pos(t_cub *cub, double tex_pos);
+int		calculate_tex_y(t_cub *cub, double tex_pos);
+int		calculate_tex_x(t_cub *cub);
+void	calculate_wallx(t_cub *cub);
+
+// textures
 int		load_textures(t_cub *cub);
+int		get_texture_num(t_cub *cub);
 
 // key_hook
 int		key_hook(int keysym, t_cub *cub);
-
-
-int load_textures2(t_cub *cub);
-
 
 #endif
