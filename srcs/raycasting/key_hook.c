@@ -6,76 +6,29 @@
 /*   By: claprand <claprand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 13:56:53 by claprand          #+#    #+#             */
-/*   Updated: 2025/01/09 11:57:37 by claprand         ###   ########.fr       */
+/*   Updated: 2025/01/09 14:52:09 by claprand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	find_width_map(char **map)
+int	is_walkable(t_cub *cub, float x, float y)
 {
-	int	i; 
-	int	j;
-	int	ret;
+	int		map_x;
+	int		map_y;
+	float	margin;
 
-	ret = 0;
-	i = 0;
-	while (map[i])
+	margin = 0.1;
+	map_x = (int)(x + margin);
+	map_y = (int)(y + margin);
+	if (map_x >= 0 && map_y >= 0 && map_y)
 	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (j > ret)
-				ret = j;
-			j++;
-		}
-		i++;
+		if (cub->parse->map[map_x][map_y] == '1')
+			return (0);
+		return (1);
 	}
-	return (ret);
+	return (0);
 }
-
-int	find_height_map(char **map)
-{
-	int	i;
-	int	j;
-	int	ret;
-
-	ret = 0;
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-			j++;
-		if (i > ret)
-			ret = i;
-		i++;
-	}
-	return (ret);
-}
-
-int is_walkable(t_cub *cub, float x, float y)
-{
-    int map_x;
-    int map_y;
-    int width;
-    int height;
-    float margin = 0.1;
-
-    map_x = (int)(x + margin);
-    map_y = (int)(y + margin);
-    width = find_width_map(cub->parse->map);
-    height = find_height_map(cub->parse->map);
-
-    if (map_x >= 0 && map_x < width && map_y >= 0 && map_y < height)
-    {
-        if (cub->parse->map[map_y][map_x] == '1')
-            return (0);
-        return (1);
-    }
-    return (0);
-}
-
 
 void	rotate_player(t_cub *cub, int keysym, float rot_speed)
 {

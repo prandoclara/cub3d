@@ -6,7 +6,7 @@
 /*   By: claprand <claprand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:28:19 by claprand          #+#    #+#             */
-/*   Updated: 2025/01/09 11:28:56 by claprand         ###   ########.fr       */
+/*   Updated: 2025/01/09 14:48:25 by claprand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,6 @@ int	main(int ac, char **av)
 			end_game(&cub);
 		if (parsing(&cub) == 1)
 			end_game(&cub);
-		int i;
-		i = 0;
-		while(cub.parse->map[i])
-		{
-			printf("%s\n", cub.parse->map[i]);
-			i++;
-		}
-		i = 0;
-		while (cub.parse->map[i])
-		{
-			printf("strlen %d\n", ft_strlen(cub.parse->map[i]));
-			i++;
-		}
 		if (launch_game(&cub) == 1)
 			end_game(&cub);
 		close(cub.parse->fd);

@@ -6,7 +6,7 @@
 /*   By: claprand <claprand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:58:06 by claprand          #+#    #+#             */
-/*   Updated: 2025/01/08 16:44:24 by claprand         ###   ########.fr       */
+/*   Updated: 2025/01/09 14:51:37 by claprand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,21 +70,26 @@ void	pixel_draw_square(t_cub *cub, int size_i, int size_j, int color)
 
 int	draw_2d_map(t_cub *cub)
 {
-	int	map_width;
-	int	map_height;
-
 	cub->minimap->i = 0;
-	map_width = find_width_mini_map(cub->parse->map);
-	map_height = find_height_mini_map(cub->parse->map);
-	clear_image_with_transparency(cub, map_width * 8.5, map_height * 8.5);
+	cub->minimap->map_width = find_width_mini_map(cub->parse->map);
+	cub->minimap->map_height = find_height_mini_map(cub->parse->map);
+	clear_image_with_transparency(cub, cub->minimap->map_width * 8.5,
+		cub->minimap->map_height * 8.5);
 	while (cub->parse->map[cub->minimap->i])
 	{
-		cub->minimap->j = 0;
-		while (cub->parse->map[cub->minimap->i][cub->minimap->j])
+		cub->minimap->j = -1;
+		while (cub->parse->map[cub->minimap->i][++cub->minimap->j])
 		{
-			if (cub->parse->map[cub->minimap->i][cub->minimap->j] != '1')
-				pixel_draw_square(cub, 8, 8, cub->game->rgb_sky);
-			cub->minimap->j++;
+			if (cub->game->rgb_sky == 0x000)
+			{
+				if (cub->parse->map[cub->minimap->i][cub->minimap->j] != '1')
+					pixel_draw_square(cub, 8, 8, 0x555555);
+			}
+			else
+			{
+				if (cub->parse->map[cub->minimap->i][cub->minimap->j] != '1')
+					pixel_draw_square(cub, 8, 8, cub->game->rgb_sky);
+			}
 		}
 		cub->minimap->i++;
 	}

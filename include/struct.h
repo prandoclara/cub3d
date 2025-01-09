@@ -6,7 +6,7 @@
 /*   By: claprand <claprand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 13:10:49 by claprand          #+#    #+#             */
-/*   Updated: 2025/01/08 16:40:33 by claprand         ###   ########.fr       */
+/*   Updated: 2025/01/09 14:48:45 by claprand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,8 @@ typedef struct s_minimap
 	double			pdy;
 	int				i;
 	int				j;
+	int				map_width;
+	int				map_height;
 	double			start_x;
 	double			start_y;
 	double			current_x;
