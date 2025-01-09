@@ -35,25 +35,6 @@ int	init_mlx(t_cub *cub)
 	return (0);
 }
 
-int	init_image_buffer(t_cub *cub)
-{
-	int	i;
-
-	if (!cub || !cub->image)
-		return (0);
-	cub->image->pixels
-		= (unsigned int *)malloc(sizeof(unsigned int) * WIDTH * HEIGHT);
-	if (!cub->image->pixels)
-		return (0);
-	i = 0;
-	while (i < WIDTH * HEIGHT)
-	{
-		cub->image->pixels[i] = 0;
-		i++;
-	}
-	return (1);
-}
-
 void	init_data(t_cub *cub)
 {
 	if (init_parse(cub) == 1)
@@ -70,15 +51,8 @@ void	init_data(t_cub *cub)
 		end_game(cub);
 	if (init_image(cub) == 1)
 		end_game(cub);
-	if (init_rvb(cub) == 1)
-		end_game(cub);
 	if (init_mlx(cub) == 1)
 		end_game(cub);
 	if (init_textures(cub) == 1)
 		end_game(cub);
-	if (!init_image_buffer(cub))
-	{
-		free(cub->image);
-		cub->image = NULL;
-	}
 }

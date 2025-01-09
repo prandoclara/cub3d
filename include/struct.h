@@ -6,7 +6,7 @@
 /*   By: claprand <claprand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 13:10:49 by claprand          #+#    #+#             */
-/*   Updated: 2025/01/07 15:48:16 by claprand         ###   ########.fr       */
+/*   Updated: 2025/01/08 16:40:33 by claprand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ typedef struct s_textures
 	int				line_length;
 	int				endian;
 	unsigned int	*pixels;
-} t_textures;
+}	t_textures;
 
 typedef struct s_image
 {
@@ -134,6 +134,16 @@ typedef struct s_minimap
 	double			pa;
 	double			pdx;
 	double			pdy;
+	int				i;
+	int				j;
+	double			start_x;
+	double			start_y;
+	double			current_x;
+	double			current_y;
+	double			step;
+	double			traveled_length;
+	int				map_x;
+	int				map_y;
 	void			*map_img;
 	void			*player_img;
 	char			*player_addr;
@@ -142,13 +152,6 @@ typedef struct s_minimap
 	int				line_length;
 	int				endian;
 }	t_minimap;
-
-typedef struct s_rvb
-{
-    int r;
-    int v;
-    int b;
-} t_rvb;
 
 typedef struct t_cub
 {
@@ -159,7 +162,6 @@ typedef struct t_cub
 	t_ray			*ray;
 	t_image			*image;
 	t_vector		*vector;
-	t_rvb			*rvb;
 }	t_cub;
 
 #endif

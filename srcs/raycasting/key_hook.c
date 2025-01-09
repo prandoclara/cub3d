@@ -6,11 +6,76 @@
 /*   By: claprand <claprand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 13:56:53 by claprand          #+#    #+#             */
-/*   Updated: 2025/01/08 11:02:59 by claprand         ###   ########.fr       */
+/*   Updated: 2025/01/09 11:57:37 by claprand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	find_width_map(char **map)
+{
+	int	i; 
+	int	j;
+	int	ret;
+
+	ret = 0;
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (j > ret)
+				ret = j;
+			j++;
+		}
+		i++;
+	}
+	return (ret);
+}
+
+int	find_height_map(char **map)
+{
+	int	i;
+	int	j;
+	int	ret;
+
+	ret = 0;
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+			j++;
+		if (i > ret)
+			ret = i;
+		i++;
+	}
+	return (ret);
+}
+
+int is_walkable(t_cub *cub, float x, float y)
+{
+    int map_x;
+    int map_y;
+    int width;
+    int height;
+    float margin = 0.1;
+
+    map_x = (int)(x + margin);
+    map_y = (int)(y + margin);
+    width = find_width_map(cub->parse->map);
+    height = find_height_map(cub->parse->map);
+
+    if (map_x >= 0 && map_x < width && map_y >= 0 && map_y < height)
+    {
+        if (cub->parse->map[map_y][map_x] == '1')
+            return (0);
+        return (1);
+    }
+    return (0);
+}
+
 
 void	rotate_player(t_cub *cub, int keysym, float rot_speed)
 {
@@ -28,7 +93,7 @@ void	rotate_player(t_cub *cub, int keysym, float rot_speed)
 	cub->player->plane.y = FOV * -cos(cub->player->angle);
 }
 
-void	move_player(t_cub *cub, int keysym, float move_speed)
+void	up_back_player(t_cub *cub, int keysym, float move_speed)
 {
 	float	new_x;
 	float	new_y;
@@ -45,8 +110,10 @@ void	move_player(t_cub *cub, int keysym, float move_speed)
 		new_x -= cub->player->dir.x * move_speed;
 		new_y -= cub->player->dir.y * move_speed;
 	}
-	cub->player->pos.x = new_x;
-	cub->player->pos.y = new_y;
+	if (is_walkable(cub, new_x, cub->player->pos.y))
+		cub->player->pos.x = new_x;
+	if (is_walkable(cub, cub->player->pos.x, new_y))
+		cub->player->pos.y = new_y;
 }
 
 void	left_right_player(t_cub *cub, int keysym, float move_speed)
@@ -66,8 +133,10 @@ void	left_right_player(t_cub *cub, int keysym, float move_speed)
 		new_x += cub->player->plane.x * move_speed;
 		new_y += cub->player->plane.y * move_speed;
 	}
-	cub->player->pos.x = new_x;
-	cub->player->pos.y = new_y;
+	if (is_walkable(cub, new_x, cub->player->pos.y))
+		cub->player->pos.x = new_x;
+	if (is_walkable(cub, cub->player->pos.x, new_y))
+		cub->player->pos.y = new_y;
 }
 
 int	key_hook(int keysym, t_cub *cub)
@@ -80,7 +149,7 @@ int	key_hook(int keysym, t_cub *cub)
 	if (keysym == XK_Escape || keysym == XK_q)
 		end_game(cub);
 	rotate_player(cub, keysym, rot_speed);
-	move_player(cub, keysym, move_speed);
+	up_back_player(cub, keysym, move_speed);
 	left_right_player(cub, keysym, move_speed);
 	return (0);
 }

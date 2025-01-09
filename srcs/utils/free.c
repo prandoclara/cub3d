@@ -6,7 +6,7 @@
 /*   By: claprand <claprand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 18:39:10 by nicjousl          #+#    #+#             */
-/*   Updated: 2025/01/08 11:41:32 by claprand         ###   ########.fr       */
+/*   Updated: 2025/01/09 10:34:05 by claprand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	end_game5(t_cub *cub)
 		mlx_destroy_image(cub->game->mlx_ptr, cub->game->east_texture);
 	if (cub->game->west_texture != NULL)
 		mlx_destroy_image(cub->game->mlx_ptr, cub->game->west_texture);
-	if (cub->image->img_ptr != NULL)
-		mlx_destroy_image(cub->game->mlx_ptr, cub->image->img_ptr);
 	if (cub->minimap->map_img != NULL)
 		mlx_destroy_image(cub->game->mlx_ptr, cub->minimap->map_img);
+	if (cub->image->img_ptr != NULL)
+		mlx_destroy_image(cub->game->mlx_ptr, cub->image->img_ptr);
 	if (cub->game->mlx_ptr != NULL)
 	{
 		mlx_destroy_display(cub->game->mlx_ptr);

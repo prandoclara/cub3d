@@ -6,11 +6,23 @@
 /*   By: claprand <claprand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 10:49:53 by claprand          #+#    #+#             */
-/*   Updated: 2025/01/08 10:57:37 by claprand         ###   ########.fr       */
+/*   Updated: 2025/01/09 11:47:13 by claprand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	fill_str(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		str[i] = c;
+		i++;
+	}
+}
 
 static char	*join_rgb_values(int r, int g, int b)
 {

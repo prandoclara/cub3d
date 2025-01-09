@@ -32,8 +32,6 @@ int	init_game(t_cub *cub)
 	draw_2d_map(cub);
 	mlx_put_image_to_window(cub->game->mlx_ptr, cub->game->mlx_win_ptr,
 		cub->image->img_ptr, 0, 0);
-	mlx_put_image_to_window(cub->game->mlx_ptr, cub->game->mlx_win_ptr,
-		cub->minimap->map_img, 0, 0);
 	return (0);
 }
 

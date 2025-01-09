@@ -6,7 +6,7 @@
 /*   By: claprand <claprand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:43:51 by claprand          #+#    #+#             */
-/*   Updated: 2025/01/08 10:54:51 by claprand         ###   ########.fr       */
+/*   Updated: 2025/01/08 16:28:52 by claprand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ void	copy_map_with_extra_char(t_cub *cub)
 	i = 0;
 	cub->parse->copy_map = ft_calloc(sizeof(char *),
 			(cub->parse->nb_line - cub->parse->start_m) + 100);
+	cub->parse->copy_map[i] = ft_calloc(sizeof(char),
+			cub->parse->long_line + 1);
+	fill_str (cub->parse->copy_map[i], 'X');
+	i++;
 	while (cub->parse->map[i])
 	{
 		cub->parse->copy_map[i] = ft_calloc(sizeof(char),
@@ -29,39 +33,6 @@ void	copy_map_with_extra_char(t_cub *cub)
 	}
 	cub->parse->copy_map[i] = NULL;
 }
-
-// int	zero_contact_to_x(t_cub *cub)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = -1;
-// 	while (cub->parse->copy_map[++i])
-// 	{
-// 		j = -1;
-// 		while (cub->parse->copy_map[i][++j])
-// 		{
-// 			if (cub->parse->copy_map[i][j] == '0')
-// 			{
-// 				if (j == 0)
-// 					return (1);
-// 				if (cub->parse->copy_map[i + 1][j]
-// 					&& cub->parse->copy_map[i + 1][j] == 'X')
-// 					return (1);
-// 				if (cub->parse->copy_map[i - 1][j]
-// 					&& cub->parse->copy_map[i - 1][j] == 'X')
-// 					return (1);
-// 				if (cub->parse->copy_map[i][j + 1]
-// 					&& cub->parse->copy_map[i][j + 1] == 'X')
-// 					return (1);
-// 				if (cub->parse->copy_map[i][j - 1]
-// 					&& cub->parse->copy_map[i][j - 1] == 'X')
-// 					return (1);
-// 			}
-// 		}
-// 	}
-// 	return (0);
-// }
 
 int	is_zero_in_contact_with_x(char **map, int i, int j)
 {

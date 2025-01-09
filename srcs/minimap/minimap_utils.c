@@ -12,6 +12,16 @@
 
 #include "cub3d.h"
 
+void	init_draw_line_from_player(t_cub *cub)
+{
+	cub->minimap->start_x = cub->player->pos.x * 8;
+	cub->minimap->start_y = cub->player->pos.y * 8;
+	cub->minimap->current_x = cub->minimap->start_x;
+	cub->minimap->current_y = cub->minimap->start_y;
+	cub->minimap->step = 1.0;
+	cub->minimap->traveled_length = 0.0;
+}
+
 void	clear_minimap(t_cub *cub)
 {
 	int	x;
@@ -42,9 +52,9 @@ void	clear_image_with_transparency(t_cub *cub, int width, int height)
 		x = 0;
 		while (x < width)
 		{
-			pixel_index = (y * cub->minimap->line_length)
-				+ (x * (cub->minimap->bits_per_pixel / 8));
-			*(unsigned int *)(cub->minimap->map_addr + pixel_index)
+			pixel_index = (y * cub->image->line_length)
+				+ (x * (cub->image->bits_per_pixel / 8));
+			*(unsigned int *)(cub->image->addr + pixel_index)
 				= MINI_MAP_WALL;
 			x++;
 		}

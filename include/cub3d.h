@@ -84,6 +84,7 @@ int		valid_texture(t_cub *cub);
 // parsing_4
 void	join_rgb_sky(t_cub *cub);
 void	join_rgb_floor(t_cub *cub);
+void	fill_str(char *str, char c);
 
 // utils 
 char	*ft_master_strndup(char *s, int start, int size);
@@ -159,9 +160,10 @@ void	clear_minimap(t_cub *cub);
 void	clear_image_with_transparency(t_cub *cub, int width, int height);
 int		find_width_mini_map(char **map);
 int		find_height_mini_map(char **map);
+void	init_draw_line_from_player(t_cub *cub);
 
 // draw_wall
-void    draw_wall2(t_cub *cub, int x, double tex_pos);
+void	draw_wall2(t_cub *cub, int x, double tex_pos);
 
 // draw_wall_utils
 double	calculate_step(t_cub *cub);

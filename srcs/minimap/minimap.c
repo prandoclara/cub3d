@@ -6,7 +6,7 @@
 /*   By: claprand <claprand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:58:06 by claprand          #+#    #+#             */
-/*   Updated: 2025/01/06 14:52:39 by claprand         ###   ########.fr       */
+/*   Updated: 2025/01/08 16:44:24 by claprand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,18 @@
 
 void	draw_line_from_player(t_cub *cub, double agl, double maxlen, int color)
 {
-	double	start_x;
-	double	start_y;
-	double	current_x;
-	double	current_y;
-	double	step;
-	double	traveled_length;
-	int		map_x;
-	int		map_y;
-
-	start_x = cub->player->pos.x * 8;
-	start_y = cub->player->pos.y * 8;
-	current_x = start_x;
-	current_y = start_y;
-	step = 1.0;
-	traveled_length = 0.0;
-	while (traveled_length < maxlen)
+	init_draw_line_from_player(cub);
+	while (cub->minimap->traveled_length < maxlen)
 	{
-		my_put_pixel_to_image(cub, (int)current_y, (int)current_x, color);
-		map_x = (int)(current_x / (8));
-		map_y = (int)(current_y / (8));
-		if (cub->parse->map[map_x][map_y] == '1')
+		my_put_pixel_to_image2(cub, (int)cub->minimap->current_y,
+			(int)cub->minimap->current_x, color);
+		cub->minimap->map_x = (int)(cub->minimap->current_x / (8));
+		cub->minimap->map_y = (int)(cub->minimap->current_y / (8));
+		if (cub->parse->map[cub->minimap->map_x][cub->minimap->map_y] == '1')
 			break ;
-		current_x += cos(agl) * step;
-		current_y += sin(agl) * step;
-		traveled_length += step;
+		cub->minimap->current_x += cos(agl) * cub->minimap->step;
+		cub->minimap->current_y += sin(agl) * cub->minimap->step;
+		cub->minimap->traveled_length += cub->minimap->step;
 	}
 }
 
@@ -61,7 +48,7 @@ void	draw_fov(t_cub *cub)
 	}
 }
 
-void	pixel_draw_square(t_cub *cub, int i, int j, int size_i, int size_j, int color)
+void	pixel_draw_square(t_cub *cub, int size_i, int size_j, int color)
 {
 	int	x;
 	int	y;
@@ -73,47 +60,34 @@ void	pixel_draw_square(t_cub *cub, int i, int j, int size_i, int size_j, int col
 		while (x < size_j)
 		{
 			if (color != 0x00000000)
-				my_put_pixel_to_image(cub, j * 8 + y, i * 8 + x, color);
+				my_put_pixel_to_image2(cub, cub->minimap->j * 8 + y,
+					cub->minimap->i * 8 + x, color);
 			x++;
 		}
 		y++;
 	}
 }
 
-int	draw_2d_player(t_cub *cub)
-{
-	pixel_draw_square(cub, cub->player->pos.x, cub->player->pos.y, 4, 4, MM_P);
-	draw_fov(cub);
-	return (0);
-}
-
 int	draw_2d_map(t_cub *cub)
 {
-	int	i;
-	int	j;
 	int	map_width;
 	int	map_height;
 
-	i = -1;
+	cub->minimap->i = 0;
 	map_width = find_width_mini_map(cub->parse->map);
 	map_height = find_height_mini_map(cub->parse->map);
-	cub->minimap->map_img = mlx_new_image(cub->game->mlx_ptr,
-			map_width * 8.5, map_height * 8.5);
-	cub->minimap->map_addr = mlx_get_data_addr(cub->minimap->map_img,
-			&cub->minimap->bits_per_pixel,
-			&cub->minimap->line_length,
-			&cub->minimap->endian);
 	clear_image_with_transparency(cub, map_width * 8.5, map_height * 8.5);
-	while (cub->parse->map[++i])
+	while (cub->parse->map[cub->minimap->i])
 	{
-		j = 0;
-		while (cub->parse->map[i][j])
+		cub->minimap->j = 0;
+		while (cub->parse->map[cub->minimap->i][cub->minimap->j])
 		{
-			if (cub->parse->map[i][j] != '1')
-				pixel_draw_square(cub, i, j, 8, 8, cub->game->rgb_sky);
-			j++;
+			if (cub->parse->map[cub->minimap->i][cub->minimap->j] != '1')
+				pixel_draw_square(cub, 8, 8, cub->game->rgb_sky);
+			cub->minimap->j++;
 		}
+		cub->minimap->i++;
 	}
-	draw_2d_player(cub);
+	draw_fov(cub);
 	return (0);
 }

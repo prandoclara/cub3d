@@ -6,7 +6,7 @@
 /*   By: claprand <claprand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 13:17:13 by claprand          #+#    #+#             */
-/*   Updated: 2025/01/08 10:46:57 by claprand         ###   ########.fr       */
+/*   Updated: 2025/01/08 16:42:54 by claprand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,5 @@ int	init_ray_s(t_cub *cub)
 	cub->ray->drawend = 0;
 	cub->ray->wallx = 0;
 	cub->ray->wall_dist = 0;
-	return (0);
-}
-
-int	init_rvb(t_cub *cub)
-{
-	t_rvb	*rvb;
-
-	rvb = malloc(sizeof(t_rvb) * 1);
-	if (!rvb)
-		return (error_handler(17), 1);
-	cub->rvb = rvb;
-	cub->rvb->r = 0;
-	cub->rvb->v = 0;
-	cub->rvb->b = 0;
 	return (0);
 }

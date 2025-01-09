@@ -1,13 +1,13 @@
-   WE                            textures/bleu.xpm
-NO      textures/vert.xpm
+   WE                            textures/west2.xpm
+NO      textures/north2.xpm
 
 
 
-SO textures/rouge.xpm 
+SO textures/south2.xpm 
 
 F      17,    38,     64
 
-EA textures/orange.xpm
+EA textures/east2.xpm
 
 
 
