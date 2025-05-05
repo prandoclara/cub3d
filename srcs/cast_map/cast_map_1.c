@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast_map_1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: claprand <claprand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clara <clara@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 13:17:19 by claprand          #+#    #+#             */
-/*   Updated: 2025/01/08 12:01:55 by claprand         ###   ########.fr       */
+/*   Updated: 2025/05/05 14:23:45 by clara            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ char	*trim_path(char *texture, char *texture_name, t_cub *cub)
 {
 	int		i;
 	int		j;
-	int		h;
+	// int		h;
 	char	*str;
 
 	i = -1;
 	j = 0;
-	h = 0;
+	// h = 0;
 	str = ft_calloc(sizeof(char), cub->parse->long_line);
 	skip_texture_name(texture, &i, &j, texture_name);
 	skip_spaces(texture, &i);
